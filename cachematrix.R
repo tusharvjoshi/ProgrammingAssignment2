@@ -1,5 +1,3 @@
-## Put comments here that give an overall description of what your
-## functions do
 
 ## This function will create an supporting environment
 ## to cache the inverse of a matrix with the original 
@@ -40,14 +38,26 @@ makeCacheMatrix <- function(x = matrix()) {
 ## then it returns the inverse
 
 cacheSolve <- function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
+  
+  ## try to get the inverse from the store
   my_inverse <- x$getinverse()
+  
+  ## If the inverse is already available 
+  ## return it 
   if(!is.null(my_inverse)) {
     message("getting cached data")
     return(my_inverse)
   }
+  
+  ## get the original matrix
   data <- x$get()
+  
+  ## compute the inverse
   my_inverse <- solve(data, ...)
+  
+  ## store the inverse for later use
   x$setinverse(my_inverse)
+  
+  ## Return a matrix that is the inverse of 'x'
   my_inverse
 }
